@@ -20,7 +20,7 @@ function deleteDom() {
   // 取得したkeyと一致するelementを取得する
 
   // サイトのhtmlから一致するelementを削除する
-  
+
   //var test = document.getElementsByClassName("promoted-tweet");
   //
   //for (var i = 0; i < test.length; i++) {
