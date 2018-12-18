@@ -1,33 +1,25 @@
 {
-  "description": "",
+  "description": "HtmlCleaner",
   "manifest_version": 2,
   "name": "HtmlCleaner",
-  "version": "1.0",
-  "homepage_url": "",
+  "version": "1.0.0",
+  "homepage_url": "https://github.com/takedajs/HtmlCleaner",
   "icons": {
-    "48": ""
+    "48": "icons/60.png"
   },
 
   "permissions": [
-    "storage",
-    "activeTab",
-    "tabs",
-    "theme"
+    "storage"
   ],
 
   "browser_action": {
-    "default_icon": "",
+    "default_icon": "icons/30.png",
     "default_title": "HtmlCleaner",
     "default_popup": "popup/keyword_save.html"
-  },
-
-  "background": {
-    "scripts": ["background.js"]
   },
 
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "js": ["content-script.js"]
   }]
-
 }

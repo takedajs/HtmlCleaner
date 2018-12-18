@@ -1,29 +1,53 @@
+var delete_count = 1;
 
-window.setInterval(deleteDom,1000);
+window.setInterval(domDelete,1000);
 
-function deleteDom() {
+function domDelete() {
 
   // 現在のサイトURLを取得
   var url = location.href;
 
-  // 登録しているサイトキーワードを取得
-
   var storage_keywords = [];
+  var storage_elements = [];
+
+  // ストレージに登録しているサイトキーワード取得
   browser.storage.local.get('value', function(items) {
     storage_keywords = items.value;
   });
 
-  // サイトキーワードと現在のサイトURLが一致するか判別
+  // ストレージに登録している要素取得
+  browser.storage.local.get('element', function(items) {
+    storage_elements = items.element;
+  });
 
-  // 一致する場合、サイトキーワードのkeyを取得
+  window.setTimeout(
+    function(){
+      var key = "";
+      var isMatch = false;
 
-  // 取得したkeyと一致するelementを取得する
+      // 表示されてるURLが登録されてるサイトキーワードに一致するか判別
+      for (var i = 0; i < storage_keywords.length; i++) {
+        if (storage_keywords[i]) {
+          var regexp = new RegExp(storage_keywords[i], 'i');
+          isMatch = regexp.test(url);
+          if (isMatch) {
+            key = i;
+            break;
+          }
 
-  // サイトのhtmlから一致するelementを削除する
+        }
+      }
 
-  //var test = document.getElementsByClassName("promoted-tweet");
-  //
-  //for (var i = 0; i < test.length; i++) {
-  //  test[i].remove();
-  //}
+      if (isMatch) {
+        // 指定要素を削除
+        var test = document.getElementsByClassName(storage_elements[i]);
+        for (var i = 0; i < test.length; i++) {
+          test[i].remove();
+          console.log("合計 " + delete_count + " 件の広告を削除");
+          delete_count++;
+        }
+      }
+    },
+    300
+  );
 }
